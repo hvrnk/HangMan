@@ -13,22 +13,19 @@ namespace HangMan
         static string userName = "";
         static string[] possibleWords = { "apple", "greensleeves", "cider", "vivacious", "hideous", "musicianship", "rebellious", "institution", "indoctrination", "compatability", "invisible", "roundhouse", "allocation", "riveting"};
         static string chosenWord;
-        static int guessesStart = 10;
+        static int guessesStart = 7;
         static int guessesLeft = guessesStart;
         static List<string> guessList = new List<string>();
         static string currentGuess;
         static bool iWin = false;
         static List<bool> boolList = new List<bool>();
+        static string playAgain;
+        static int cursorStartHangMan;
 
         static void HangMan()
         {
             WelcomeToTheGame();
-
-            ThinkingAnimation();
-            Console.Clear();
-            
             CompChooseWord();
-            Console.Clear();
 
             do 
             {
@@ -43,8 +40,6 @@ namespace HangMan
             {
                 YouLose();
             }
-
-
         }
         
         /// <summary>
@@ -52,42 +47,74 @@ namespace HangMan
         /// </summary>
         static void WelcomeToTheGame()
         {
-            //Console.WriteLine("Hello there! I have a little game I'd like to play with you.");
-            Printing("Hello there! I have a little game I'd like to play with you.");
-            //Console.WriteLine("But first! May I ask you your name?");
-            Thread.Sleep(500);
-            Printing("But first! May I ask you your name?");
-            Thread.Sleep(500);
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            PrintingSameLine("        ██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗  "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine(" █████"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗ "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("███"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗   "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗ "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██████"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗ "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("███"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗   "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("███"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗ "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("█████"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗ "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("███"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗   "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; Printing("╗"); Console.ForegroundColor = ConsoleColor.DarkBlue;
+            PrintingSameLine("        ██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║  "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╔══"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("████"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("  ██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╔════╝ "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("████"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗ "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("████"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╔══"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("████"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗  "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; Printing("║"); Console.ForegroundColor = ConsoleColor.DarkBlue;
+            PrintingSameLine("        ███████"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("███████"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╔"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗ "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║  "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("███"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╔"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("████"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╔"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("███████"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╔"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗ "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; Printing("║"); Console.ForegroundColor = ConsoleColor.DarkBlue;
+            PrintingSameLine("        ██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╔══"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╔══"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║╚"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║   "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║╚"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╔╝"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╔══"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║╚"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╗"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; Printing("║");Console.ForegroundColor = ConsoleColor.DarkBlue;
+            PrintingSameLine("        ██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║  "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║  "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║ ╚"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("████"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║╚"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██████"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("╔╝"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║ ╚═╝ "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║  "); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("██"); Console.ForegroundColor = ConsoleColor.Cyan; PrintingSameLine("║ ╚"); Console.ForegroundColor = ConsoleColor.DarkBlue; PrintingSameLine("████"); Console.ForegroundColor = ConsoleColor.Cyan; Printing("║");
+            PrintingSameLine("        ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝"); Console.ForegroundColor = ConsoleColor.DarkBlue;
 
             Console.WriteLine();
-            //Console.WriteLine("...");
-            Printing("...");
-            Console.WriteLine();
+//            Printing(@"
+//
+//        ██╗  ██╗ █████╗ ███╗   ██╗ ██████╗ ███╗   ███╗ █████╗ ███╗   ██╗
+//        ██║  ██║██╔══██╗████╗  ██║██╔════╝ ████╗ ████║██╔══██╗████╗  ██║
+//        ███████║███████║██╔██╗ ██║██║  ███╗██╔████╔██║███████║██╔██╗ ██║
+//        ██╔══██║██╔══██║██║╚██╗██║██║   ██║██║╚██╔╝██║██╔══██║██║╚██╗██║
+//        ██║  ██║██║  ██║██║ ╚████║╚██████╔╝██║ ╚═╝ ██║██║  ██║██║ ╚████║
+//        ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝
+//
+//                        ");
+            cursorStartHangMan = Console.CursorTop;
+
+            guessesLeft = 7;
+            for (int i = 0; i <= 7; i++)
+            {
+                Console.SetCursorPosition(0, cursorStartHangMan);
+                DrawHangedMan();
+                Thread.Sleep(300);
+                guessesLeft--;
+            }
+            guessesLeft = 7;
+
+
+            PrintingSameLine("        Enter name: ");
             
             //Receive input for user name
-            userName = Console.ReadLine().ToString();
-
-            Console.WriteLine();
-            ThinkingAnimation();             
-
-            Thread.Sleep(1500);
+            userName = Console.ReadLine();
+            Thread.Sleep(200);
+            //Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.Clear();
+
+            Header();
+
+            Thread.Sleep(250);
+
+            DrawHangedMan();
+            Console.ForegroundColor = ConsoleColor.Gray;
+             
+
+//            Thread.Sleep(1500);
             
             //Welome & explanation
             //Console.WriteLine("Wonderful! Welcome " + userName + ", I'm thrilled to have you.");
-            Printing("Wonderful! Welcome " + userName + ", I'm thrilled to have you.");
-            Thread.Sleep(500);
-            Printing("Today I'll be picking a word, and you'll be trying to figure out what it is.");
-            Thread.Sleep(500);
-            Printing("You can either guess the whole word or individual letters.");
-            Thread.Sleep(500);
-            Printing("If you guess the wrong word or your letter doesn't occur - you'll lose a guess.");
-            Thread.Sleep(500);
-            Printing("If you guess a letter that's in the word, I'll show you where it occurs.");
+            Printing("        Welcome " + userName + "! Let's play HANGMAN.");
             Thread.Sleep(500);
             Console.WriteLine();
-            Printing("Think you can handle it, " + userName + "? Press any key to continue...");
+            Printing("        I've selected a word.");
+            Thread.Sleep(500);
+            Printing("        Guess a letter at a time or the whole word.");
+            Thread.Sleep(500);
+            Printing("        Guess wrong, and you'll lose a guess. ");
+            Thread.Sleep(500);
+            Printing("        Guess right, and I'll show you where the letter shows up.");
+            Thread.Sleep(500);
+            Console.WriteLine();
+            Printing("        Think you can handle it, " + userName + "? Press any key to continue...");
             Console.ReadKey();
+            ThinkingAnimation();
+            Console.Clear();
         }
 
         /// <summary>
@@ -103,29 +130,6 @@ namespace HangMan
 
             //Set chosenWord to possibleWords[randomIndex]
             chosenWord = possibleWords[randomIndex].ToUpper();
-
-            //Print that word has been chosen
-            Printing("I've made my choice:");
-            Thread.Sleep(1000);
-
-            //Display chosen word with underscores instead of letters.
-            var tempList = new List<string>();
-            for (int i = 0; i < chosenWord.Length; i++)
-            {
-                tempList.Add("_ ");
-            }
-            for (int i = 0; i < chosenWord.Length; i++)
-            { 
-                Console.Write(tempList[i]);
-                Thread.Sleep(100);
-            }
-
-            //Ready to make your first guess?
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-
-            ReceiveAndAnalyzeGuess();
         }
 
         /// <summary>
@@ -151,9 +155,23 @@ namespace HangMan
             for (int i = 0; i < input.Length; i++)
             {
                 Console.Write(input[i]);
-                Thread.Sleep(1);
+                //Thread.Sleep(1);
             }
             Console.WriteLine();
+        }
+
+        /// <summary>
+        /// Animated printing function
+        /// </summary>
+        /// <param name="input">Text to be printed</param>
+        /// <param name="delay">delay between each letter printed</param>
+        static void PrintingSameLine(string input)
+        {
+            for (int i = 0; i < input.Length; i++)
+            {
+                Console.Write(input[i]);
+                Thread.Sleep(1);
+            }
         }
 
         /// <summary>
@@ -247,7 +265,10 @@ namespace HangMan
                     //subtract from guess counter
                     guessesLeft -= 1;
 
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Printing("I'm sorry " + userName + ", that guess was incorrect.");
+                    Console.ForegroundColor = ConsoleColor.White;
+
                     Console.WriteLine();
                     Thread.Sleep(1000);
                     Console.WriteLine();
@@ -278,15 +299,30 @@ namespace HangMan
                 }
             }
 
-            if (!guessIsThere)
+            //check to see if user input is empty
+            if (currentGuess.Length == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Printing("You didn't type anything! Let's try that again...");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            //if guess is not there
+            else if (!guessIsThere)
             {
                 guessesLeft -= 1;
+                Console.ForegroundColor = ConsoleColor.Red;
                 Printing("Sorry! That one's not in there.");
+                Console.ForegroundColor = ConsoleColor.White;
             }
+            //else guess is there
             else
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Printing("Good work! That one's in there.");
+                Console.ForegroundColor = ConsoleColor.White;
             }
+
+            
 
             //delay so message can be read
             Thread.Sleep(1000);
@@ -303,12 +339,12 @@ namespace HangMan
         /// </summary>
         static void Gameplay()
         {
-            Printing("Alright " + userName + ", here's what you're workin' with...");
-            Console.WriteLine();
+            Header();
+
+            DrawHangedMan();
 
             PrintGuessedLetters();
             
-            //Line break
             Console.WriteLine();
             Console.WriteLine();
 
@@ -339,25 +375,10 @@ namespace HangMan
         /// </summary>
         static void YouWin()
         {
-            Printing("Correctomundo! You've got it " + userName + "!");
-            Printing("You made " + (guessesStart - guessesLeft) + " incorrect guesses.");
-            Console.WriteLine();
-            Thread.Sleep(500);
-            
-            Printing("The word I was looking for was:");
-            Console.WriteLine();
 
-            for (int i = 0; i < chosenWord.Length; i++)
-            {
-                Console.Write(chosenWord[i].ToString() + ' ');
-            }
-            Console.WriteLine();
-            Console.WriteLine();
-
-            Printing("Thanks for playing!");
-            Thread.Sleep(200);
-            Printing("I hope to play again soon.");
-
+            Header();
+            DrawHangedMan();
+            GreenChosenWord();
         }
 
         /// <summary>
@@ -365,33 +386,327 @@ namespace HangMan
         /// </summary>
         static void YouLose()
         {
-            Printing("You thought!!");
-            Thread.Sleep(300);
-            Printing("But nah...you're done.");
-            Console.WriteLine();
-            Printing("The word I was looking for was:");
-            Console.WriteLine();
+            RedHeader();
 
-            for (int i = 0; i < chosenWord.Length; i++)
-            {
-                Console.Write(chosenWord[i].ToString() + ' ');
-            }
-            Console.WriteLine();
-            Printing("I've got lots more words you can guess, so whaddaya say?");
-            Printing("Let's try again later!");
+            DrawHangedMan();
+
+            RedChosenWord();
         }
 
-       
+        static void DrawHangedMan()
+        {
+                    if (guessesLeft == 7)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine(@"
+
+                             ____________________
+                            | .__________________|
+                            | | / /                         
+                            | |/ /                    
+                            | | /                       
+                            | |/                     
+                            | |                       
+                            | |                       
+                            | |                           
+                            | |                           
+                            | |                            
+                            | |                               
+                            | |                            
+                            | |                          
+                            | |                            
+                            | |                         
+                            | |                         
+                            | |                        
+                            | |-------|-----------|-|
+                            | |-------|-----------|-|
+                            | |                   | |
+                            | |                   | | 
+                            . .                   . .
+                            _________________________
+         
+
+");
+                    }
+                    if (guessesLeft == 6)
+                    {
+                        Console.WriteLine(@"
+
+                             ___________.._______
+                            | .__________))______|
+                            | | / /      ||
+                            | |/ /       ||
+                            | | /        ||
+                            | |/         ||
+                            | |         
+                            | |          
+                            | |              
+                            | |               
+                            | |                
+                            | |                 
+                            | |                  
+                            | |          
+                            | |          
+                            | |          
+                            | |         
+                            | |         
+                            | |-------|-----------|-|
+                            | |-------|-----------|-|
+                            | |                   | |
+                            | |                   | | 
+                            . .                   . .
+                            _________________________
+
+
+");
+
+                    }
+                    if (guessesLeft == 5)
+                    {
+                        Console.WriteLine(@"
+
+                             ___________.._______
+                            | .__________))______|
+                            | | / /      ||
+                            | |/ /       ||.-''.      
+                            | | /        |/  _  \ 
+                            | |/         ||  `/,| 
+                            | |           \\`_.' 
+                            | |
+                            | |              
+                            | |               
+                            | |                
+                            | |                 
+                            | |                  
+                            | |          
+                            | |          
+                            | |          
+                            | |         
+                            | |         
+                            | |-------|-----------|-|
+                            | |-------|-----------|-|
+                            | |                   | |
+                            | |                   | | 
+                            . .                   . .
+                            _________________________
+
+
+");
+                    }
+                    if (guessesLeft == 4)
+                    {
+                        Console.WriteLine(@"
+
+                             ___________.._______
+                            | .__________))______|
+                            | | / /      ||
+                            | |/ /       ||.-''.      
+                            | | /        |/  _  \ 
+                            | |/         ||  `/,| 
+                            | |           \\`_.' 
+                            | |              '.
+                            | |               Y\
+                            | |                \\
+                            | |                 \\
+                            | |                  (`
+                            | |
+                            | |          
+                            | |          
+                            | |          
+                            | |         
+                            | |         
+                            | |-------|-----------|-|
+                            | |-------|-----------|-|
+                            | |                   | |
+                            | |                   | | 
+                            . .                   . .
+                            _________________________
+
+
+");
+                    }
+                    if (guessesLeft == 3)
+                    {
+                        Console.WriteLine(@"
+
+                             ___________.._______
+                            | .__________))______|
+                            | | / /      ||
+                            | |/ /       ||.-''.      
+                            | | /        |/  _  \ 
+                            | |/         ||  `/,| 
+                            | |          (\\`_.' 
+                            | |         .-`--'.
+                            | |        /Y     Y\
+                            | |       //       \\
+                            | |      //         \\
+                            | |     ')           (`
+                            | |
+                            | |          
+                            | |          
+                            | |          
+                            | |         
+                            | |         
+                            | |-------|-----------|-|
+                            | |-------|-----------|-|
+                            | |                   | |
+                            | |                   | | 
+                            . .                   . .
+                            _________________________
+
+
+");
+                    }
+                    if (guessesLeft == 2)
+                    {
+                        Console.WriteLine(@"
+
+                             ___________.._______
+                            | .__________))______|
+                            | | / /      ||
+                            | |/ /       ||.-''.      
+                            | | /        |/  _  \ 
+                            | |/         ||  `/,| 
+                            | |          (\\`_.' 
+                            | |         .-`--'.
+                            | |        /Y . . Y\
+                            | |       // |   | \\
+                            | |      //  | . |  \\
+                            | |     ')   |   |   (`
+                            | |
+                            | |          
+                            | |          
+                            | |          
+                            | |         
+                            | |         
+                            | |-------|-----------|-|
+                            | |-------|-----------|-|
+                            | |                   | |
+                            | |                   | | 
+                            . .                   . .
+                            _________________________
+
+
+");
+                    }
+                    if (guessesLeft == 1)
+                    {
+                        Console.WriteLine(@"
+
+                             ___________.._______
+                            | .__________))______|
+                            | | / /      ||
+                            | |/ /       ||.-''.       
+                            | | /        |/  _  \ 
+                            | |/         ||  `/,|
+                            | |          (\\`_.' 
+                            | |         .-`--'. 
+                            | |        /Y . . Y\
+                            | |       // |   | \\
+                            | |      //  | . |  \\
+                            | |     ')   |   |   (`
+                            | |          ||'||
+                            | |          || ||
+                            | |          || ||
+                            | |          || ||
+                            | |         / | | \         
+                            | |         `-' `-'
+                            | |-------|-----------|-|
+                            | |-------|-----------|-|
+                            | |                   | |
+                            | |                   | | 
+                            . .                   . .
+                            _________________________
+
+
+");
+                    }
+                    if (guessesLeft == 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+
+                        Console.WriteLine(@"
+
+                             ___________.._______
+                            | .__________))______|
+                            | | / /      ||             
+                            | |/ /       ||             
+                            | | /        ||.-''.  
+                            | |/         |/  _  \  
+                            | |          ||  `/,|   
+                            | |          (\\`_.'    
+                            | |         .-`--'.   
+                            | |        /Y . . Y\   
+                            | |       // |   | \\   
+                            | |      //  | . |  \\   
+                            | |     ')   |   |   (`   
+                            | |          ||'||  
+                            | |          || ||  
+                            | |          || ||  
+                            | |          || ||  
+                            | |         / | | \  
+                            | |-------|_`-' `-' |---|  
+                            | |-------\ \       --|-|  
+                            | |        \ \        | |  
+                            | |         \ \       | |   
+                            . .          `'       . .  
+                            _________________________  
+
+
+");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+            }
+        }
+
+        static void Header()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(@"        ██╗  ██╗ █████╗ ███╗   ██╗ ██████╗ ███╗   ███╗ █████╗ ███╗   ██╗
+        ██║  ██║██╔══██╗████╗  ██║██╔════╝ ████╗ ████║██╔══██╗████╗  ██║
+        ███████║███████║██╔██╗ ██║██║  ███╗██╔████╔██║███████║██╔██╗ ██║
+        ██╔══██║██╔══██║██║╚██╗██║██║   ██║██║╚██╔╝██║██╔══██║██║╚██╗██║
+        ██║  ██║██║  ██║██║ ╚████║╚██████╔╝██║ ╚═╝ ██║██║  ██║██║ ╚████║
+        ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝");
+        }
+        
+        static void RedHeader()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(@"        ██╗  ██╗ █████╗ ███╗   ██╗ ██████╗ ███╗   ███╗ █████╗ ███╗   ██╗
+        ██║  ██║██╔══██╗████╗  ██║██╔════╝ ████╗ ████║██╔══██╗████╗  ██║
+        ███████║███████║██╔██╗ ██║██║  ███╗██╔████╔██║███████║██╔██╗ ██║
+        ██╔══██║██╔══██║██║╚██╗██║██║   ██║██║╚██╔╝██║██╔══██║██║╚██╗██║
+        ██║  ██║██║  ██║██║ ╚████║╚██████╔╝██║ ╚═╝ ██║██║  ██║██║ ╚████║
+        ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝");
+        }
+
+        static void RedChosenWord()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            for (int i = 0; i < chosenWord.Length; i++)
+            {
+                Console.Write(chosenWord[i] + " ");
+                Thread.Sleep(50);
+            }
+        }
+
+        static void GreenChosenWord()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            for (int i = 0; i < chosenWord.Length; i++)
+            {
+                Console.Write(chosenWord[i] + " ");
+                Thread.Sleep(50);
+            }
+        }
 
         static void Main(string[] args)
         {
+            Console.SetWindowSize(80, 50);
+
             HangMan();
+
             Console.ReadKey();
-
-
-            //var guessed = new List<string();
-            //guessed.Where(x => x == userName || x =="e" || x == "s"); 
-            //guessed.Where(x=> x == "a").Any();
         }
     }
 }
