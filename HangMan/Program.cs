@@ -239,6 +239,12 @@ namespace HangMan
             }
         }
 
+        /// <summary>
+        /// Takes users guess, determines if letter or word
+        /// Determines if a letter is part of word or not
+        /// Determines if a guessed word is correct
+        /// Checks to see if all letters in word have been guessed
+        /// </summary>
         static void ReceiveAndAnalyzeGuess()
         {
             //Ask for user's guess
@@ -333,6 +339,9 @@ namespace HangMan
 
         }
 
+        /// <summary>
+        /// Flashes animation for incorrect guess
+        /// </summary>
         static void GuessIsWrong()
         {
             var preFuncBackground = Console.BackgroundColor;
@@ -370,6 +379,9 @@ namespace HangMan
             Console.Clear();
         }
 
+        /// <summary>
+        /// Flashes animation for correct guess
+        /// </summary>
         static void GuessIsRight()
         {
             var preFuncBackground = Console.BackgroundColor;
